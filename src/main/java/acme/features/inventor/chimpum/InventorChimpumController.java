@@ -11,7 +11,8 @@ import acme.roles.Inventor;
 
 @Controller
 public class InventorChimpumController extends AbstractController<Inventor, Chimpum>{
-
+ 
+	
 	@Autowired
 	protected InventorChimpumListService listService;
 
