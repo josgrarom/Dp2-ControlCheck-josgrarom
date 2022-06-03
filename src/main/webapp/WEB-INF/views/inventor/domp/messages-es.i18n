@@ -1,0 +1,27 @@
+inventor.domp.list.label.code = Código
+inventor.domp.list.label.title = Título
+inventor.domp.list.label.budget = Presupuesto
+inventor.domp.list.label.startDate = Fecha de inicio
+inventor.domp.list.label.endDate = Fecha de fin
+
+inventor.domp.form.label.code = Código
+inventor.domp.form.label.subject = Tema
+inventor.domp.form.label.summary = Resumen
+inventor.domp.form.label.helping = Ayuda
+inventor.domp.form.label.creationMoment = Fecha de creación
+inventor.domp.form.label.startDate = Fecha de inicio
+inventor.domp.form.label.endDate = Fecha de fin
+inventor.domp.form.label.furtherInfo = Información adicional
+inventor.domp.form.label.exchange = Precio convertido
+
+inventor.domp.form.label.pattern = Patrón
+
+inventor.domp.form.button.update = Actualizar
+inventor.domp.form.button.create = Crear
+inventor.domp.form.button.delete = Borrar
+
+inventor.domp.form.button.items= Mostrar item
+
+inventor.domp.form.error.startDate = El periodo de tiempo debe de ser de al menos un mes después de la creación del domp
+inventor.domp.form.error.endDate = El periodo de tiempo debe de ser de al menos una semana después del comienzo del domp
+inventor.domp.error.pattern = Introduzca un código de 2 a 4 carácteres

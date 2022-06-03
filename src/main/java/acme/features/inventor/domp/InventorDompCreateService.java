@@ -1,4 +1,4 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.domp;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import SpamDetector.SpamDetector;
-import acme.entities.chimpums.Chimpum;
+import acme.entities.domps.Domp;
 import acme.entities.initialConfiguration.InitialConfiguration;
 import acme.entities.items.Item;
+import acme.entities.items.ItemType;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Errors;
 import acme.framework.controllers.Request;
@@ -22,13 +23,13 @@ import acme.framework.services.AbstractCreateService;
 import acme.roles.Inventor;
 
 @Service
-public class InventorChimpumCreateService implements AbstractCreateService<Inventor, Chimpum>{
+public class InventorDompCreateService implements AbstractCreateService<Inventor, Domp>{
 	
 	@Autowired
-	protected InventorChimpumRepository repository;
+	protected InventorDompRepository repository;
 
 	@Override
-	public boolean authorise(final Request<Chimpum> request) {
+	public boolean authorise(final Request<Domp> request) {
 		assert request != null;
 
 		Item item;
@@ -36,28 +37,28 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 		
 		boolean result;
 
-		result = item.getInventor().getId() == request.getPrincipal().getActiveRoleId() && !item.isDraftMode();
+		result = item.getInventor().getId() == request.getPrincipal().getActiveRoleId() && !item.isDraftMode() && item.getItemType()== ItemType.TOOL;
 
 		return result;
 	}
 
 	@Override
-	public void bind(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void bind(final Request<Domp> request, final Domp entity, final Errors errors) {
 		
-		request.bind(entity, errors, "title", "description", "budget", "creationMoment", "startDate", "endDate", "moreInfo");
+		request.bind(entity, errors, "subject", "summary", "helping", "creationMoment", "startDate", "endDate", "furtherInfo");
 		
 		String pattern;
 		pattern = request.getModel().getString("pattern");
 		final LocalDate cm =  entity.getCreationMoment().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		entity.setCode(pattern + "-" + this.generateCode(cm));
+		entity.setCode(pattern + ":" + this.generateCode(cm));
 		
 	}
 
 	@Override
-	public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+	public void unbind(final Request<Domp> request, final Domp entity, final Model model) {
 		
 		
-		request.unbind(entity, model, "title", "description", "budget", "creationMoment", "startDate", "endDate", "moreInfo");	
+		request.unbind(entity, model, "subject", "summary", "helping", "creationMoment", "startDate", "endDate", "furtherInfo");	
 		
 		model.setAttribute("itemId", request.getModel().getInteger("itemId"));
 		if(entity.getCode()!=null) {
@@ -66,22 +67,22 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 	}
 
 	@Override
-	public Chimpum instantiate(final Request<Chimpum> request) {
+	public Domp instantiate(final Request<Domp> request) {
 		assert request != null;
-		Chimpum result;
+		Domp result;
 	
 		Date moment;
 
 		moment = new Date(System.currentTimeMillis() - 1);
 	
-		result = new Chimpum();
+		result = new Domp();
 		result.setItem(this.repository.findOneItemById(request.getModel().getInteger("itemId")));
 		result.setCreationMoment(moment);	
 		return result;
 	}
 
 	@Override
-	public void validate(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void validate(final Request<Domp> request, final Domp entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -98,39 +99,39 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 
             pattern = request.getModel().getString("pattern");
 
-            errors.state(request, pattern.matches("[A-Z]{3}"), "pattern", "inventor.chimpum.error.pattern");
+            errors.state(request, pattern.matches("\\w{2,4}"), "pattern", "inventor.domp.error.pattern");
 
 
         
-        if(!errors.hasErrors("title")) {
+        if(!errors.hasErrors("subject")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getTitle(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getSubject(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "title", "any.chirp.form.error.spam");
+            errors.state(request, res, "subject", "any.chirp.form.error.spam");
 
         }
         
-        if(!errors.hasErrors("description")) {
+        if(!errors.hasErrors("summary")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getDescription(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getSummary(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "description", "any.chirp.form.error.spam");
+            errors.state(request, res, "Summary", "any.chirp.form.error.spam");
 
         }
         
-        if(!errors.hasErrors("moreInfo")) {
+        if(!errors.hasErrors("furtherInfo")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getMoreInfo(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getFurtherInfo(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "moreInfo", "any.chirp.form.error.spam");
+            errors.state(request, res, "furtherInfo", "any.chirp.form.error.spam");
 
         }
 		
 		
-		if(!errors.hasErrors("budget")) {
+		if(!errors.hasErrors("helping")) {
 			
 			final List<String> currencies = new ArrayList<>();
 			
@@ -140,9 +141,9 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 				currencies.add(c.trim());
 			}
 			
-			currency = entity.getBudget().getCurrency();
+			currency = entity.getHelping().getCurrency();
 			
-			errors.state(request, currencies.contains(currency) , "budget","patron.patronage.form.error.currency");
+			errors.state(request, currencies.contains(currency) , "helping","patron.patronage.form.error.currency");
 			
 		}
 		if(entity.getStartDate()!=null) {
@@ -157,7 +158,7 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 	        final TimeUnit time = TimeUnit.DAYS; 
 	        final long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
 	        
-	        errors.state(request, diffrence>=30 , "startDate","inventor.chimpum.form.error.startDate");
+	        errors.state(request, diffrence>=30 , "startDate","inventor.Domp.form.error.startDate");
 			
 			
 		}
@@ -173,26 +174,26 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 	        final TimeUnit time = TimeUnit.DAYS; 
 	        final long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
 	        
-	        errors.state(request, diffrence>=7 , "endDate","inventor.chimpum.form.error.endDate");
+	        errors.state(request, diffrence>=7 , "endDate","inventor.Domp.form.error.endDate");
 			
 			
 		}
 		}
-		if(!errors.hasErrors("budget")) {
+		if(!errors.hasErrors("helping")) {
 			
-			Money budget;
+			Money helping;
 			
-			budget = entity.getBudget();
+			helping = entity.getHelping();
 			
 			
-			errors.state(request, budget.getAmount()>0 , "budget","patron.patronage.form.error.amount");
+			errors.state(request, helping.getAmount()>0 , "helping","patron.patronage.form.error.amount");
 			
 		}
 		
 	}
 
 	@Override
-	public void create(final Request<Chimpum> request, final Chimpum entity) {
+	public void create(final Request<Domp> request, final Domp entity) {
 		assert request != null;
 		assert entity != null;
 		
@@ -242,7 +243,7 @@ public class InventorChimpumCreateService implements AbstractCreateService<Inven
 			
 		}
 		
-		res= tYear + "-" + tMonth + "-" + tDay;
+		res= tYear + ":" + tMonth + tDay;
 		
 		return res;
 		

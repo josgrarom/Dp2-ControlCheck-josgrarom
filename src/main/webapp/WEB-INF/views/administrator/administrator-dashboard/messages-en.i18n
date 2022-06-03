@@ -15,12 +15,12 @@ administrator.dashboard.form.label.deviation-retailPrice = Deviation retail pric
 administrator.dashboard.form.label.minimun-retailPrice = Minimun retail price of tools
 administrator.dashboard.form.label.maximun-retailPrice = Maximun retail price of tools
 
-#CHIMPUM
-administrator.dashboard.form.label.ratio = Ratio of items with chimpum
-administrator.dashboard.form.label.chimpum.average-budget = Average retail price of chimpums
-administrator.dashboard.form.label.chimpum.deviation-budget = Deviation retail price of chimpums
-administrator.dashboard.form.label.chimpum.minimun-budget = Minimun retail price of chimpums
-administrator.dashboard.form.label.chimpum.maximun-budget = Maximun retail price of chimpums
+#domp
+administrator.dashboard.form.label.ratio = Ratio of items with domp
+administrator.dashboard.form.label.domp.average-budget = Average retail price of domps
+administrator.dashboard.form.label.domp.deviation-budget = Deviation retail price of domps
+administrator.dashboard.form.label.domp.minimun-budget = Minimun retail price of domps
+administrator.dashboard.form.label.domp.maximun-budget = Maximun retail price of domps
 
 #PATRONAGE
 administrator.dashboard.form.title.patronages = Patronage indicators

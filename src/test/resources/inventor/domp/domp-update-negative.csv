@@ -1,4 +1,4 @@
-recordIndex,pattern,title,description,budget,startDate,endDate,moreInfo
+recordIndex,pattern,subject,summary,helping,startDate,endDate,furtherInfo
 0,ASD,,AThis is a test,"EUR 1,000.00",2022/07/20 21:00,2022/07/27 21:00,
 1,FGD,AThis is a test,,"EUR 1,000.00",2022/07/20 21:00,2022/07/27 21:00,
 2,SDE,AThis is a test,AThis is a test,,2022/07/20 21:00,2022/07/27 21:00,

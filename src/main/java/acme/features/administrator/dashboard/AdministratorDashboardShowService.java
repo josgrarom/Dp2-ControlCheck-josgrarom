@@ -65,12 +65,12 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		final Map<String,Double> maximunBudgetOfToolGroupedByCurrency;
 		
 		
-		//CHIMPUM DECLARACION
-		final Double ratioOfItemsWithChimpum;
-		final Map<String,Double> averageBudgetOfChimpumGroupedByCurrency;
-		final Map<String,Double> deviationBudgetOfChimpumGroupedByCurrency;
-		final Map<String,Double> minimunBudgetOfChimpumGroupedByCurrency;
-		final Map<String,Double> maximunBudgetOfChimpumGroupedByCurrency;
+		//DOMP DECLARACION
+		final Double ratioOfItemsWithDomp;
+		final Map<String,Double> averageBudgetOfDompGroupedByCurrency;
+		final Map<String,Double> deviationBudgetOfDompGroupedByCurrency;
+		final Map<String,Double> minimunBudgetOfDompGroupedByCurrency;
+		final Map<String,Double> maximunBudgetOfDompGroupedByCurrency;
 		
 		//PATRONAGE DECLARACION
 		final AdministratorDashboard result;
@@ -104,12 +104,12 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		minimunBudgetOfToolGroupedByCurrency = this.parseTool(this.repository.minimunBudgetOfToolGroupedByCurrency());
 		maximunBudgetOfToolGroupedByCurrency = this.parseTool(this.repository.maximunBudgetOfToolGroupedByCurrency());
 		
-		//TOOL INICIALIZACION
-		ratioOfItemsWithChimpum = this.repository.getRatioOfItemsWithChimpum();
-		averageBudgetOfChimpumGroupedByCurrency = this.parseTool(this.repository.getAverageBudgetOfChimpumGroupedByCurrency());
-		deviationBudgetOfChimpumGroupedByCurrency = this.parseTool(this.repository.getDeviationBudgetOfChimpumGroupedByCurrency());
-		minimunBudgetOfChimpumGroupedByCurrency = this.parseTool(this.repository.getMinimunBudgetOfChimpumGroupedByCurrency());
-		maximunBudgetOfChimpumGroupedByCurrency = this.parseTool(this.repository.getMaximunBudgetOfChimpumGroupedByCurrency());
+		//DOMP INICIALIZACION
+		ratioOfItemsWithDomp = this.repository.getRatioOfItemsWithDomps();
+		averageBudgetOfDompGroupedByCurrency = this.parseTool(this.repository.getAverageBudgetOfDompGroupedByCurrency());
+		deviationBudgetOfDompGroupedByCurrency = this.parseTool(this.repository.getDeviationBudgetOfDompGroupedByCurrency());
+		minimunBudgetOfDompGroupedByCurrency = this.parseTool(this.repository.getMinimunBudgetOfDompGroupedByCurrency());
+		maximunBudgetOfDompGroupedByCurrency = this.parseTool(this.repository.getMaximunBudgetOfDompGroupedByCurrency());
 	
 		//PATRONAGE INICIALIZACION
 		totalNumberOfProposedPatronages = this.repository.totalNumberOfProposedPatronages();
@@ -144,12 +144,12 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		result.setMinimunBudgetOfToolGroupedByCurrency(minimunBudgetOfToolGroupedByCurrency);
 		result.setMaximunBudgetOfToolGroupedByCurrency(maximunBudgetOfToolGroupedByCurrency);
 		
-		//CHIMPUM ASIGNACION
-		result.setRatioOfItemsWithChimpum(ratioOfItemsWithChimpum);;
-		result.setAverageBudgetOfChimpumGroupedByCurrency(averageBudgetOfChimpumGroupedByCurrency);
-		result.setDeviationBudgetOfChimpumGroupedByCurrency(deviationBudgetOfChimpumGroupedByCurrency);
-		result.setMinimunBudgetOfChimpumGroupedByCurrency(minimunBudgetOfChimpumGroupedByCurrency);
-		result.setMaximunBudgetOfChimpumGroupedByCurrency(maximunBudgetOfChimpumGroupedByCurrency);
+		//Domp ASIGNACION
+		result.setRatioOfItemsWithDomp(ratioOfItemsWithDomp);;
+		result.setAverageBudgetOfDompGroupedByCurrency(averageBudgetOfDompGroupedByCurrency);
+		result.setDeviationBudgetOfDompGroupedByCurrency(deviationBudgetOfDompGroupedByCurrency);
+		result.setMinimunBudgetOfDompGroupedByCurrency(minimunBudgetOfDompGroupedByCurrency);
+		result.setMaximunBudgetOfDompGroupedByCurrency(maximunBudgetOfDompGroupedByCurrency);
 		
 		//PATRONAGE ASIGNACION
 		
@@ -189,8 +189,8 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 			"totalNumberOfTools", "averageBudgetOfToolGroupedByCurrency", "deviationBudgetOfToolGroupedByCurrency", 
 			"minimunBudgetOfToolGroupedByCurrency", "maximunBudgetOfToolGroupedByCurrency",
 			
-			"ratioOfItemsWithChimpum", "averageBudgetOfChimpumGroupedByCurrency", "deviationBudgetOfChimpumGroupedByCurrency", 
-			"minimunBudgetOfChimpumGroupedByCurrency", "maximunBudgetOfChimpumGroupedByCurrency",
+			"ratioOfItemsWithDomp", "averageBudgetOfDompGroupedByCurrency", "deviationBudgetOfDompGroupedByCurrency", 
+			"minimunBudgetOfDompGroupedByCurrency", "maximunBudgetOfDompGroupedByCurrency",
 			
 			"totalNumberOfProposedPatronages", "totalNumberOfAcceptedPatronages", "totalNumberOfDeniedPatronages",
 			"averageBudgetOfPatronagesGroupedByStatusAndCurrency", "deviationBudgetOfPatronagesGroupedByStatusAndCurrency",

@@ -1,4 +1,4 @@
-package acme.testing.inventor.chimpum;
+package acme.testing.inventor.domp;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import acme.testing.TestHarness;
 
-public class InventorChimpumDashboardTest extends TestHarness {
+public class InventorDompDashboardTest extends TestHarness {
 	
     @ParameterizedTest
     @CsvFileSource(resources = "/administrator/administrator-dashboard/administrator-dashboard.csv", encoding = "utf-8", numLinesToSkip = 1)

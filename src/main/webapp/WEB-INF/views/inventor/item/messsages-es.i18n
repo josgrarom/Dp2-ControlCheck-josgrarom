@@ -22,5 +22,5 @@ inventor.item.form.error.tool-retailPrice = La cantidad no puede ser negativa en
 inventor.item.form.error.component-retailPrice = La cantidad no puede ser negativa o zero en componentes
 inventor.item.form.error.duplicated = Ya existe un instrumento con ese código
 
-inventor.item.form.button.create-chimpum = Crear chimpum
-inventor.item.form.button.show-chimpum = Mostrar chimpum
+inventor.item.form.button.create-domp = Crear domp
+inventor.item.form.button.show-domp = Mostrar domp

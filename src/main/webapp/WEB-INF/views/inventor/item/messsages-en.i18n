@@ -23,5 +23,5 @@ inventor.item.form.error.tool-retailPrice = The amount cannot be negative in too
 inventor.item.form.error.component-retailPrice = The amount cannot be negative or zero in components
 inventor.item.form.error.duplicated = It already exists another item with the same code
 
-inventor.item.form.button.create-chimpum = Create chimpum
-inventor.item.form.button.show-chimpum = Show chimpum
+inventor.item.form.button.create-domp = Create domp
+inventor.item.form.button.show-domp = Show domp

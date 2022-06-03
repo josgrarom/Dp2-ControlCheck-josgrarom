@@ -1,4 +1,4 @@
-package acme.entities.chimpums;
+package acme.entities.domps;
 
 import java.util.Date;
 
@@ -25,12 +25,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Chimpum extends AbstractEntity{
+public class Domp extends AbstractEntity{
 	
 	protected static final long serialVersionUID = 1L;
 	
 	@NotNull
-	@Pattern(regexp = "^[A-Z]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}$")
+	@Pattern(regexp = "^\\w{2,4}:[0-9]{2}:[0-9]{4}$")
 	protected String code;
 
 	@NotNull
@@ -48,18 +48,18 @@ public class Chimpum extends AbstractEntity{
 	
 	@NotBlank
 	@Length(min=1, max = 100)
-	protected String title;
+	protected String subject;
 	
 	@NotBlank
 	@Length(min=1, max = 255)
-	protected String description;
+	protected String summary;
 	
 	@NotNull
 	@Valid
-	protected Money budget;
+	protected Money helping;
 
 	@URL
-	protected String moreInfo;
+	protected String furtherInfo;
 	
 	@NotNull
 	@Valid

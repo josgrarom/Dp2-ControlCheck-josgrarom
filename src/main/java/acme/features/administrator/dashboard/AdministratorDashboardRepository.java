@@ -67,21 +67,23 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 	List<String> maximunBudgetOfToolGroupedByCurrency();
 	
 	
-	//CHIMPUM
-	@Query("select 1.0 * count(a) / (select count(b) from Item b) from Chimpum a")
-	Double getRatioOfItemsWithChimpum();
+	//DOMP
+	@Query("select 1.0 * count(a) / (select count(b) from Item b) from Domp a")
+	Double getRatioOfItemsWithDomps();
 	
-	@Query("select t.budget.currency, avg(t.budget.amount) from Chimpum t  group by t.budget.currency")
-	List<String> getAverageBudgetOfChimpumGroupedByCurrency();
+	@Query("select t.helping.currency, avg(t.helping.amount) from Domp t where t.item.itemType = acme.entities.items.ItemType.TOOL  group by t.helping.currency")
+	List<String> getAverageBudgetOfDompGroupedByCurrency();
 	
-	@Query("select t.budget.currency, stddev(t.budget.amount) from Chimpum t group by t.budget.currency")
-	List<String> getDeviationBudgetOfChimpumGroupedByCurrency();
+	@Query("select t.helping.currency, stddev(t.helping.amount) from Domp t where t.item.itemType = acme.entities.items.ItemType.TOOL group by t.helping.currency")
+	List<String> getDeviationBudgetOfDompGroupedByCurrency();
 	
-	@Query("select t.budget.currency, min(t.budget.amount) from Chimpum  t group by t.budget.currency")
-	List<String> getMinimunBudgetOfChimpumGroupedByCurrency();
+	@Query("select t.helping.currency, min(t.helping.amount) from Domp  t where t.item.itemType = acme.entities.items.ItemType.TOOL group by t.helping.currency")
+	List<String> getMinimunBudgetOfDompGroupedByCurrency();
 	
-	@Query("select  t.budget.currency, max(t.budget.amount) from Chimpum t  group by t.budget.currency")
-	List<String> getMaximunBudgetOfChimpumGroupedByCurrency();
+	@Query("select  t.helping.currency, max(t.helping.amount) from Domp t where t.item.itemType = acme.entities.items.ItemType.TOOL group by t.helping.currency")
+	List<String> getMaximunBudgetOfDompGroupedByCurrency();
+	
+	
 	
 	//COMPONENT
 	@Query("select count(c) from Item c where c.itemType = acme.entities.items.ItemType.COMPONENT")

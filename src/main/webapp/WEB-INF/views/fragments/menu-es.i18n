@@ -57,7 +57,7 @@ master.menu.inventor = Inventor
 master.menu.inventor.item.list = Lista mis instrumentos
 master.menu.inventor.toolkit.list = Lista mis kits de herramientas
 master.menu.inventor.patronage.list = Lista mis patrocinios
-master.menu.inventor.chimpum.list = Listar mis chimpums
+master.menu.inventor.domp.list = Listar mis domps
 
 
 # master.menu.patron ####################################################

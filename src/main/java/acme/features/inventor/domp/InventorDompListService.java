@@ -1,4 +1,4 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.domp;
 
 import java.util.Collection;
 
@@ -6,49 +6,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.currencyExchangeFunction.ExchangeMoneyFunctionService;
-import acme.entities.chimpums.Chimpum;
+import acme.entities.domps.Domp;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Request;
 import acme.framework.services.AbstractListService;
 import acme.roles.Inventor;
 
 @Service
-public class InventorChimpumListService implements AbstractListService<Inventor, Chimpum> {
+public class InventorDompListService implements AbstractListService<Inventor, Domp> {
 
 	@Autowired
-	protected InventorChimpumRepository repository;
+	protected InventorDompRepository repository;
 	
 	@Autowired
 	protected ExchangeMoneyFunctionService exchangeService;
 
 
 	@Override
-	public boolean authorise(final Request<Chimpum> request) {
+	public boolean authorise(final Request<Domp> request) {
 		assert request != null;
 
 		return true;
 	}
 
 	@Override
-	public Collection<Chimpum> findMany(final Request<Chimpum> request) {
+	public Collection<Domp> findMany(final Request<Domp> request) {
 		assert request != null;
 		
-		final Collection<Chimpum> result;
+		final Collection<Domp> result;
 		
 		
-		result = this.repository.findChimpumsByInventorId(request.getPrincipal().getActiveRoleId());
+		result = this.repository.findDompsByInventorId(request.getPrincipal().getActiveRoleId());
 
 		return result;
 
 	}
 
 	@Override
-	public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+	public void unbind(final Request<Domp> request, final Domp entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "code", "title","budget", "startDate","endDate");
+		request.unbind(entity, model, "code", "subject","helping", "startDate","endDate");
 
 	}
 

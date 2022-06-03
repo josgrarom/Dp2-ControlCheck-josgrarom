@@ -69,7 +69,7 @@ public class InventorItemShowService implements AbstractShowService<Inventor, It
 		model.setAttribute("exchange", exchange.target);
 		model.setAttribute("isExchange", isExchange);
 		model.setAttribute("itemId", entity.getId());
-		model.setAttribute("chimpum", this.repository.findOneChimpumByItemId(entity.getId()));
+		model.setAttribute("domp", this.repository.findOneDompByItemId(entity.getId()));
 	}
 
 }

@@ -40,13 +40,13 @@
 			<acme:submit code="inventor.item.form.button.delete" action="/inventor/item/delete"/>
 			<acme:submit code="inventor.item.form.button.publish" action="/inventor/item/publish"/>
 			</jstl:when>
-			<jstl:when test="${draftMode == false}">	
+			<jstl:when test="${draftMode == false && itemType == 'TOOL' }">	
 			<jstl:choose>
-				<jstl:when test="${chimpum==null }">
-					<acme:button code="inventor.item.form.button.create-chimpum" action="/inventor/chimpum/create?itemId=${itemId}"/>
+				<jstl:when test="${domp==null }">
+					<acme:button code="inventor.item.form.button.create-domp" action="/inventor/domp/create?itemId=${itemId}"/>
 				</jstl:when>
-					<jstl:when test="${chimpum!=null }">
-					<acme:button code="inventor.item.form.button.show-chimpum" action="/inventor/chimpum/show?id=${chimpum}"/>
+					<jstl:when test="${domp!=null }">
+					<acme:button code="inventor.item.form.button.show-domp" action="/inventor/domp/show?id=${domp}"/>
 				</jstl:when>
 			</jstl:choose>
 			</jstl:when>

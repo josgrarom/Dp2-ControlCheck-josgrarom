@@ -38,8 +38,8 @@ public interface InventorItemRepository extends AbstractRepository {
 	@Query("select i from Inventor i where i.id = :id")
 	Inventor findOneInventorById(int id);
 	
-	@Query("SELECT c.id FROM Chimpum c WHERE c.item.id =:id")
-	Integer findOneChimpumByItemId(int id);
+	@Query("SELECT c.id FROM Domp c WHERE c.item.id =:id")
+	Integer findOneDompByItemId(int id);
 	
 
 }

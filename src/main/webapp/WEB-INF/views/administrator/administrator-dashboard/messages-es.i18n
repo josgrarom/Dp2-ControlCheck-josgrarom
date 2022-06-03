@@ -16,12 +16,12 @@ administrator.dashboard.form.label.deviation-retailPrice = Desviación del preci
 administrator.dashboard.form.label.minimun-retailPrice = Precio mínimo de herramientas
 administrator.dashboard.form.label.maximun-retailPrice = Precio máximo de herramientas
 
-#CHIMPUM
-administrator.dashboard.form.label.ratio = Ratio de items con chimpum
-administrator.dashboard.form.label.chimpum.average-budget = Promedio del precio de chimpums
-administrator.dashboard.form.label.chimpum.deviation-budget = Desviación del precio de chimpums
-administrator.dashboard.form.label.chimpum.minimun-budget = Precio mínimo de chimpums
-administrator.dashboard.form.label.chimpum.maximun-budget = Precio máximo de chimpums
+#domp
+administrator.dashboard.form.label.ratio = Ratio de items con domp
+administrator.dashboard.form.label.domp.average-budget = Promedio del precio de domps
+administrator.dashboard.form.label.domp.deviation-budget = Desviación del precio de domps
+administrator.dashboard.form.label.domp.minimun-budget = Precio mínimo de domps
+administrator.dashboard.form.label.domp.maximun-budget = Precio máximo de domps
 
 
 

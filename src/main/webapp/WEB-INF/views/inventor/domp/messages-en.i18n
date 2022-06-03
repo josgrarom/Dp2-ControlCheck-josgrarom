@@ -1,0 +1,27 @@
+inventor.domp.list.label.code = Code
+inventor.domp.list.label.subject = Subject
+inventor.domp.list.label.helping = Helping
+inventor.domp.list.label.startDate = Start date
+inventor.domp.list.label.endDate = End date
+
+inventor.domp.form.label.code = Code
+inventor.domp.form.label.subject = Subject
+inventor.domp.form.label.summary = Summary
+inventor.domp.form.label.helping = Helping
+inventor.domp.form.label.creationMoment = Creation moment
+inventor.domp.form.label.startDate = Start date
+inventor.domp.form.label.endDate = End date
+inventor.domp.form.label.furtherInfo = Further info
+inventor.domp.form.label.exchange = Exchanged price
+
+inventor.domp.form.label.pattern = Pattern
+
+inventor.domp.form.button.update = Update
+inventor.domp.form.button.create = Create
+inventor.domp.form.button.delete = Delete
+
+inventor.domp.form.button.items = Show item
+
+inventor.domp.form.error.startDate = The period of time must be at least one month after the domp is created
+inventor.domp.form.error.endDate = The period of time must be at least one week after the domp is started
+inventor.domp.error.pattern = Enter a code with 2 to 4 characters

@@ -1,4 +1,4 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.domp;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import SpamDetector.SpamDetector;
 import acme.currencyExchangeFunction.ExchangeMoneyFunctionService;
-import acme.entities.chimpums.Chimpum;
+import acme.entities.domps.Domp;
 import acme.entities.initialConfiguration.InitialConfiguration;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Errors;
@@ -22,67 +22,67 @@ import acme.framework.services.AbstractUpdateService;
 import acme.roles.Inventor;
 
 @Service
-public class InventorChimpumUpdateService implements AbstractUpdateService<Inventor,Chimpum>{
+public class InventorDompUpdateService implements AbstractUpdateService<Inventor,Domp>{
 	
 
 	@Autowired
-	protected InventorChimpumRepository repository;
+	protected InventorDompRepository repository;
 	
 	@Autowired
 	protected ExchangeMoneyFunctionService exchangeService;
 
 	@Override
-	public boolean authorise(final Request<Chimpum> request) {
+	public boolean authorise(final Request<Domp> request) {
 		assert request != null;
 
 		boolean result;
-		int chimpumId;
-		Chimpum chimpum;
+		int dompId;
+		Domp domp;
 
-		chimpumId = request.getModel().getInteger("id");
-		chimpum = this.repository.findOneChimpumById(chimpumId);
-		result = chimpum.getItem().getInventor().getId() == request.getPrincipal().getActiveRoleId();
+		dompId = request.getModel().getInteger("id");
+		domp = this.repository.findOneDompById(dompId);
+		result = domp.getItem().getInventor().getId() == request.getPrincipal().getActiveRoleId();
 		
 		return result;
 	}
 
 	@Override
-	public void bind(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void bind(final Request<Domp> request, final Domp entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
 		
-		request.bind(entity, errors, "title", "description","creationMoment", "budget", "startDate", "endDate", "moreInfo");
+		request.bind(entity, errors, "subject", "summary","creationMoment", "helping", "startDate", "endDate", "furtherInfo");
 		
 		
 	}
 
 	@Override
-	public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+	public void unbind(final Request<Domp> request, final Domp entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
 		
-		request.unbind(entity, model, "code","title", "description","creationMoment", "budget", "startDate", "endDate", "moreInfo");
+		request.unbind(entity, model, "code","subject", "summary","creationMoment", "helping", "startDate", "endDate", "furtherInfo");
 		
 		model.setAttribute("pattern", entity.getCode().substring(0,3));
 		
 	}
 
 	@Override
-	public Chimpum findOne(final Request<Chimpum> request) {
+	public Domp findOne(final Request<Domp> request) {
 		assert request != null;
-		Chimpum result;
+		Domp result;
 		int id;
 		
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneChimpumById(id);
+		result = this.repository.findOneDompById(id);
 		
 		return result;
 	}
 
 	@Override
-	public void validate(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void validate(final Request<Domp> request, final Domp entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -98,37 +98,37 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 
         pattern = request.getModel().getString("pattern");
 
-        errors.state(request, pattern.matches("[A-Z]{3}"), "pattern", "inventor.chimpum.error.pattern");
+        errors.state(request, pattern.matches("\\w{2,4}"), "pattern", "inventor.domp.error.pattern");
 		
-        if(!errors.hasErrors("title")) {
+        if(!errors.hasErrors("subject")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getTitle(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getSubject(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "title", "any.chirp.form.error.spam");
+            errors.state(request, res, "subject", "any.chirp.form.error.spam");
 
         }
         
-        if(!errors.hasErrors("description")) {
+        if(!errors.hasErrors("summary")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getDescription(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getSummary(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "description", "any.chirp.form.error.spam");
+            errors.state(request, res, "summary", "any.chirp.form.error.spam");
 
         }
         
-        if(!errors.hasErrors("moreInfo")) {
+        if(!errors.hasErrors("furtherInfo")) {
             final boolean res;
 
-            res = SpamDetector.spamDetector(entity.getMoreInfo(),Strong,Weak,StrongT,WeakT);
+            res = SpamDetector.spamDetector(entity.getFurtherInfo(),Strong,Weak,StrongT,WeakT);
 
-            errors.state(request, res, "moreInfo", "any.chirp.form.error.spam");
+            errors.state(request, res, "furtherInfo", "any.chirp.form.error.spam");
 
         }
 		
 		
-		if(!errors.hasErrors("budget")) {
+		if(!errors.hasErrors("helping")) {
 			
 			final List<String> currencies = new ArrayList<>();
 			
@@ -138,9 +138,9 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 				currencies.add(c.trim());
 			}
 			
-			currency = entity.getBudget().getCurrency();
+			currency = entity.getHelping().getCurrency();
 			
-			errors.state(request, currencies.contains(currency) , "budget","patron.patronage.form.error.currency");
+			errors.state(request, currencies.contains(currency) , "helping","patron.patronage.form.error.currency");
 			
 		}
 		if(entity.getStartDate()!=null) {
@@ -155,7 +155,7 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 	        final TimeUnit time = TimeUnit.DAYS; 
 	        final long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
 	        
-	        errors.state(request, diffrence>=30 , "startDate","inventor.chimpum.form.error.startDate");
+	        errors.state(request, diffrence>=30 , "startDate","inventor.domp.form.error.startDate");
 			
 			
 		}
@@ -171,19 +171,19 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 	        final TimeUnit time = TimeUnit.DAYS; 
 	        final long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
 	        
-	        errors.state(request, diffrence>=7 , "endDate","inventor.chimpum.form.error.endDate");
+	        errors.state(request, diffrence>=7 , "endDate","inventor.domp.form.error.endDate");
 			
 			
 		}
 		}
-		if(!errors.hasErrors("budget")) {
+		if(!errors.hasErrors("helping")) {
 			
 			Money budget;
 			
-			budget = entity.getBudget();
+			budget = entity.getHelping();
 			
 			
-			errors.state(request, budget.getAmount()>0 , "budget","patron.patronage.form.error.amount");
+			errors.state(request, budget.getAmount()>0 , "helping","patron.patronage.form.error.amount");
 			
 		}
 		
@@ -191,14 +191,14 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 	}
 
 	@Override
-	public void update(final Request<Chimpum> request, final Chimpum entity) {
+	public void update(final Request<Domp> request, final Domp entity) {
 		assert request != null;
 		assert entity != null;
 		
 		String pattern;
 		pattern = request.getModel().getString("pattern");
 		final LocalDate cm =  entity.getCreationMoment().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		entity.setCode(pattern + "-" + this.generateCode(cm));
+		entity.setCode(pattern + ":" + this.generateCode(cm));
 
 		this.repository.save(entity);
 		
@@ -246,7 +246,7 @@ public class InventorChimpumUpdateService implements AbstractUpdateService<Inven
 			
 		}
 		
-		res= tYear + "-" + tMonth + "-" + tDay;
+		res= tYear + ":" + tMonth + tDay;
 		
 		return res;
 		

@@ -1,10 +1,10 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.domp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.currencyExchangeFunction.ExchangeMoneyFunctionService;
-import acme.entities.chimpums.Chimpum;
+import acme.entities.domps.Domp;
 import acme.forms.MoneyExchange;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Request;
@@ -12,44 +12,44 @@ import acme.framework.services.AbstractShowService;
 import acme.roles.Inventor;
 
 @Service
-public class InventorChimpumShowService implements AbstractShowService<Inventor, Chimpum> {
+public class InventorDompShowService implements AbstractShowService<Inventor, Domp> {
 
 	@Autowired
-	protected InventorChimpumRepository repository;
+	protected InventorDompRepository repository;
 	
 	@Autowired
 	protected ExchangeMoneyFunctionService exchangeService;
 
 	@Override
-	public boolean authorise(final Request<Chimpum> request) {
+	public boolean authorise(final Request<Domp> request) {
 		assert request != null;
 
 		boolean result;
-		int chimpumId;
-		Chimpum chimpum;
+		int dompId;
+		Domp domp;
 
-		chimpumId = request.getModel().getInteger("id");
-		chimpum = this.repository.findOneChimpumById(chimpumId);
-		result = chimpum.getItem().getInventor().getId() == request.getPrincipal().getActiveRoleId();
+		dompId = request.getModel().getInteger("id");
+		domp = this.repository.findOneDompById(dompId);
+		result = domp.getItem().getInventor().getId() == request.getPrincipal().getActiveRoleId();
 		
 		return result;
 	}
 
 	@Override
-	public Chimpum findOne(final Request<Chimpum> request) {
+	public Domp findOne(final Request<Domp> request) {
 		assert request != null;
-		Chimpum result;
+		Domp result;
 		int id;
 
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneChimpumById(id);
+		result = this.repository.findOneDompById(id);
 
 
 		return result;
 	}
 
 	@Override
-	public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+	public void unbind(final Request<Domp> request, final Domp entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -59,10 +59,10 @@ public class InventorChimpumShowService implements AbstractShowService<Inventor,
 		boolean isExchange;
 		
 		defaultCurrency = this.repository.defaultCurrency();
-		exchange = this.exchangeService.computeMoneyExchange(entity.getBudget(), defaultCurrency);
-		isExchange = ! entity.getBudget().getCurrency().equals(exchange.target.getCurrency());
+		exchange = this.exchangeService.computeMoneyExchange(entity.getHelping(), defaultCurrency);
+		isExchange = ! entity.getHelping().getCurrency().equals(exchange.target.getCurrency());
 
-		request.unbind(entity, model, "code", "title", "description", "budget", "creationMoment", "startDate", "endDate", "moreInfo");
+		request.unbind(entity, model, "code", "subject", "summary", "helping", "creationMoment", "startDate", "endDate", "furtherInfo");
 		
 		model.setAttribute("exchange", exchange.target);
 		model.setAttribute("isExchange", isExchange);
